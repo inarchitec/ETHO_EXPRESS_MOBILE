@@ -100,7 +100,7 @@ const Cart = () => {
 								</View>
 								<DataTable.Cell  style={{textTransform:'uppercase',fontFamily:'Regular',margin:5}}>
                                     <View style={{display:'flex',flexDirection:'col'}}>
-                                        <View  style={{textTransform:'uppercase',fontFamily:'Regular',margin:5, fontSize:13}}>   {item.price * item.quantity} </View>
+                                        <View  style={{textTransform:'uppercase',fontFamily:'Regular',margin:5, fontSize:13}}> <Text>{item.price * item.quantity}</Text>   </View>
 
 
 								<Pressable  
@@ -122,46 +122,48 @@ const Cart = () => {
         
       <DataTable.Row> 
         <DataTable.Cell> 
-        <View style={styles.tableHeader3}>
+        <Text style={styles.tableHeader3}>
 
         Cart Subtotal
-            </View>
+            </Text>
             </DataTable.Cell> 
             <DataTable.Cell> 
-        <View style={styles.tableHeader4}>
+        <Text style={styles.tableHeader4}>
+        
 
         {Cart_Products.reduce((total, item)=>total+(item.price*item.quantity),0)}
-            </View>
+        
+            </Text>
             </DataTable.Cell> 
          
       </DataTable.Row> 
       <DataTable.Row> 
         <DataTable.Cell> 
-        <View style={styles.tableHeader3}>
+        <Text style={styles.tableHeader3}>
 
         Delivery
-            </View>
+            </Text>
             </DataTable.Cell> 
             <DataTable.Cell> 
-        <View style={styles.tableHeader4}>
+        <Text style={styles.tableHeader4}>
 
        Free
-            </View>
+            </Text>
             </DataTable.Cell> 
          
       </DataTable.Row> 
       <DataTable.Row> 
         <DataTable.Cell> 
-        <View style={styles.tableHeader3}>
+        <Text style={styles.tableHeader3}>
 
         You Pay
-            </View>
+            </Text>
             </DataTable.Cell> 
             <DataTable.Cell> 
-        <View style={styles.tableHeader4}>
-
-        {final_pay}
-            </View>
+        <Text style={styles.tableHeader4}>
+ {final_pay} 
+        
+            </Text>
             </DataTable.Cell> 
          
       </DataTable.Row> 
@@ -174,10 +176,10 @@ const Cart = () => {
       
       onPress={() =>  navigation.navigate(user_info == '' ? 'Login' : 'Checkout')} >
 
-            <View style={styles.tableHeader2}>
+            <Text style={styles.tableHeader2}>
 
             CHECKOUT
-            </View>
+            </Text>
       </Pressable>
         </DataTable.Cell> 
         
@@ -190,10 +192,13 @@ const Cart = () => {
         <DataTable.Cell  >
         <Pressable onPress={() =>  navigation.navigate('Shop')} >
 
-            <View style={styles.tableHeader2}>
+            <Text style={styles.tableHeader2}>
+             
 
             CONTINUE SHOPPING
-            </View>
+              
+
+            </Text>
         </Pressable>
         </DataTable.Cell> 
         

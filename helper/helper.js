@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useNavigation } from '@react-navigation/native';
- 
+import AsyncStorage from '@react-native-async-storage/async-storage';
  
 
 
 export const storeUser = (data) => {
-   localStorage.setItem(
-       "user",
-       JSON.stringify({
+    AsyncStorage.setItem(
+       "@user",
+        ({
            username: data.user.username,
            first_name: data.user.first_name,
            last_name: data.user.last_name,
@@ -19,14 +19,14 @@ export const storeUser = (data) => {
 }
 
 export const UserData = () => {
-   const stringifiedUser = localStorage.getItem("user")  || '""';
-   return JSON.parse(stringifiedUser || {});
+   const stringifiedUser = AsyncStorage.getItem("@user")  || '""';
+   return  (stringifiedUser || {});
 }
 
 
 export const Protector = ({component}) => {
     
-   const navigate = useNavigate();
+   const navigate = useNavigation();
    const { jwt} = UserData();
 
    useEffect(() =>{

@@ -49,7 +49,7 @@ const BottomTabNavigation = () => {
         />      */}
 
  
-     <Tab.Screen  name='Home'  component={Home}
+    <Tab.Screen  name='Home'  component={Home}
         options={
             {
                 tabBarIcon:({focused}) =>{
@@ -61,7 +61,7 @@ const BottomTabNavigation = () => {
                 }
             }
         }
-        />   
+        />     
          <Tab.Screen  name='Shop'  component={Shop}
         options={
             { 
