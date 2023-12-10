@@ -22,7 +22,7 @@ import { useState } from 'react';
 
  const Stack = createNativeStackNavigator();
  
-import { Provider } from 'react-redux/es';
+import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './redux/store';
 import { UserData } from './helper/helper';
@@ -75,13 +75,12 @@ export default function App() {
     return null;
   } 
   const isSignedIn = getIsSignedIn();
-
-   
+ 
   
   return (
    
 <Provider store={store}>
-<PersistGate loading={"loading"} persistor={persistor}>
+<PersistGate persistor={persistor}>
      <NavigationContainer>
           <Stack.Navigator>
           
@@ -89,26 +88,26 @@ export default function App() {
             name='BottomTabNavigation'
             component={BottomTabNavigation}
             options={{headerShown:false}}/>  
-            <Stack.Screen name="Home" component={Home}
+            <Stack.Screen name="Home" component={Home} options={{headerShown:false}}
           />  
             
-          <Stack.Screen name="Product" component={Product}
+          <Stack.Screen name="Product" component={Product}   
            />
            
-            <Stack.Screen name="Cart" component={Cart}
+            <Stack.Screen name="Cart" component={Cart}   
            />
            
             
              
-           <Stack.Screen name="Profile" component={Profile}
+           <Stack.Screen name="Profile" component={Profile}   
            />  
            
            
-          <Stack.Screen name="Login" component={Login}
+          <Stack.Screen name="Login" component={Login}  options={{headerShown:false}}
            /> 
-           <Stack.Screen name="Register" component={Register}
+           <Stack.Screen name="Register" component={Register}  options={{headerShown:false}}
            /> 
-           <Stack.Screen name="Checkout" component={Checkout}
+           <Stack.Screen name="Checkout" component={Checkout}   
            /> 
            
           </Stack.Navigator>

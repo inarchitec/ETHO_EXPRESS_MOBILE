@@ -16,13 +16,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import { COLORS, SIZES } from "../constants";
 import { Ionicons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native-web";
+import { TouchableOpacity } from "react-native";
 import Search from "../components/Search";
 import useFetch from "../hooks/useFetch";
 import { useState } from "react";
 import { REACT_APP_UPLOAD_URL } from "@env";
 import { RadioButton } from "react-native-paper";
-import Pagination, { Icon, Dot } from "react-native-pagination";
+ 
 import { Dropdown } from 'react-native-element-dropdown';
  
 
@@ -33,10 +33,13 @@ const HEIGHT = Dimensions.get("window").height;
 
 const Shop = ({ route  }) => {
 const [show , setShow] = useState(false);
- const file = route.params; 
-	const search = file ? file?.state.search : '';
+//  const pass = route.params; 
+ const pass = route.params; 
+ const  search  = pass ? pass?.state.pass?.search : '';
+ 
+	// const search = pass ? pass?.state.search : '';
   // console.log(search,'search')
-  // console.log(file, 'file')
+  // console.log( search  , 'pass')
 
   const Show = [
     { showlabel: '5', showvalue: '5' },
@@ -51,15 +54,15 @@ const [show , setShow] = useState(false);
   const [isshowFocus, setIsshowFocus] = useState(false);
 
   // console.log(showvalue,'showvalue')
-	const [sort, setSort] = useState("asc");
+	const [sort, setSort] = useState("created_At");
 
   const Sort = [
     { sortlabel: 'Name', sortvalue: 'title' },
-    { sortlabel: 'Date', sortvalue: 'createdAt' },
+    { sortlabel: 'Date', sortvalue: 'created_At' },
     { sortlabel: 'Price', sortvalue: 'price' },
    
   ];
-  const [sortvalue, setsortValue] = useState(null);
+  const [sortvalue, setsortValue] = useState("created_At");
   const [issortFocus, setIssortFocus] = useState(false);
   // console.log(sortvalue,'sortvalue')
 
@@ -71,7 +74,7 @@ const [show , setShow] = useState(false);
     
    
   ];
-  const [ordervalue, setorderValue] = useState(null);
+  const [ordervalue, setorderValue] = useState("desc");
   const [isorderFocus, setIsorderFocus] = useState(false);
   // console.log(ordervalue,'ordervalue')
 
@@ -132,342 +135,13 @@ const pageCount = Math.ceil( data?.length / showvalue);
     }
   };
 
-  const User = () =>{
-    return   <View style={{backgroundColor:'transparent' }}>
-    <View
-      style={{
-        display: "flex",
-        flex:1,
-        flexWrap:'wrap',
-        flexDirection: "row",
-        paddingLeft:10,
-        paddingTop:10,
-        paddingBottom:10,
-        backgroundColor: "white",
-        height: HEIGHT / 15,
-      }}
-    >
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-           
-        }}
-      >
-      
-        <View style={{fontFamily:'Medium',}}><Text>Show</Text></View>
-        <View style={{marginTop:-5, height:20}}>
-          <Dropdown style={{  
-
- backgroundColor:"lightgrey" ,fontFamily:'Medium' ,
-borderRadius:3,padding:3,height:30, marginLeft:10,
-
-}}
-            placeholder={!isshowFocus ? ' 10' : ''}
-            placeholderStyle={{width:30,height:20,alignItems:'center',fontFamily:'Medium'}}
-            selectedTextStyle={{width:30,height:20,alignItems:'center',fontFamily:'Medium', color:COLORS.color1, paddingLeft:5}}
-              data={Show}
-              labelField="showlabel"
-              valueField="showvalue"
-              value={showvalue}
-    onFocus={() => setIsshowFocus(true)}
-    onBlur={() => setIsshowFocus(false)}
-    onChange={item => {
-      setshowValue(item.showvalue);
-      setIsshowFocus(false);
-    }}
-          ></Dropdown>
-        </View>
-      </View>
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          paddingLeft:10,
-        
-
-        }}
-      >
-        <View style={{fontFamily:'Medium',}}><Text>Sort By :</Text></View>
-        <View style={{marginTop:-5.5, height:20}}>
-          <Dropdown style={{  
-
-borderBottomColor: 'black', backgroundColor:'lightgrey',borderColor:'black',fontFamily:'Medium',
-borderRadius:3,padding:3,height:30, marginLeft:10,}}
-            placeholder={!isshowFocus ? '' : ''}
-            placeholderStyle={{width:60,height:20,alignItems:'center',fontFamily:'Medium',marginTop:-2}}
-            selectedTextStyle={{width:60,height:20,alignItems:'center',fontFamily:'Medium',color:COLORS.color1, paddingLeft:5}}
-              data={Sort}
-              labelField="sortlabel"
-              valueField="sortvalue"
-              value={sortvalue}
-    onFocus={() => setIssortFocus(true)}
-    onBlur={() => setIssortFocus(false)}
-    onChange={item => {
-      setsortValue(item.sortvalue);
-      
-      setIssortFocus(false);
-    }}
-          ></Dropdown>
-        </View>
-      </View>
-     
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-       
-          paddingTop:12,
-          marginTop:4
-
-        }}
-      >
-        <View style={{fontFamily:'Medium',}}><Text>Order By :</Text></View>
-        <View style={{marginTop:-5.5, height:20}}>
-          <Dropdown
-          style={{  
-
-            borderBottomColor: 'gray', backgroundColor:'lightgrey',borderColor:'white',fontFamily:'Medium',
-            borderRadius:3,padding:3,height:30, marginLeft:10}}
-            placeholder={!issortFocus ? '' : ''}
-            placeholderStyle={{width:100,height:20,alignItems:'center',fontFamily:'Medium',marginTop:-2}}
-            selectedTextStyle={{width:100,height:20,alignItems:'center',fontFamily:'Medium',color:COLORS.color1,paddingLeft:5}}
-              data={Order}
-              labelField="orderlabel"
-              valueField="ordervalue"
-              value={ordervalue}
-    onFocus={() => setIsorderFocus(true)}
-    onBlur={() => setIsorderFocus(false)}
-    onChange={item => {
-      setorderValue(item.ordervalue);
-      setIsorderFocus(false);
-    }}
-          ></Dropdown>
-        </View>
-      </View>
-     
-    </View>
-
-    <View
-      style={{ backgroundColor: "white", WIDTH: WIDTH, height: 320 }}
-    >
-      <View>
-        <Text
-          style={{
-            marginLeft: 10,
-            marginTop: 20,
-            fontFamily: "Medium",
-            textTransform: "capitalize",
-          }}
-        >
-          Categories
-        </Text>
-        <View style={styles.container}>
-        {
-                  categ_data?.map((x) =>(
-                    <View key={x.id} style={styles.checkboxContainer}>
-                         
-                         <input type="checkbox" id={x.id} 
-                  
-                  value={x.id} onChange={handleChange} />
-            <Text style={styles.label}>{x.attributes?.title}</Text>
-        </View>
-                  ))  
-        }
-
-          
-           
-        </View>
-      </View>
-      <View>
-        <Text
-          style={{
-            marginLeft: 10,
-         
-            fontFamily: "Medium",
-            textTransform: "capitalize",
-           
-          }}
-        >
-          Shop By Price
-        </Text>
-
-        <View
-          style={{
-            backgroundColor: "White",
-            flex: 1,
-            alignItems: "left",
-            justifyContent: "left",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            alignItems: "flex-end",
-           
-          }}
-        >
-          <View style={{ display: "flex", flexDirection: "row" }}>
-            <RadioButton
-              value="1-1000000"
-              status={checked === "1-1000000" ? "checked" : "unchecked"}
-              onPress={() => {setChecked("1-1000000")
-              setPrice_min(1),
-              setPrice_max(1000000)
-            }}
-            />
-            <Text
-              style={{
-                justifyContent: "center",
-                marginTop: 8,
-                fontFamily: "Medium",
-              }}
-            >
-              All Price
-            </Text>
-          </View>
-          <View style={{ display: "flex", flexDirection: "row" }}>
-            <RadioButton
-              value="1-500"
-              status={checked === "1-500" ? "checked" : "unchecked"}
-              onPress={() => {setChecked("1-500")
-              setPrice_min(1),
-              setPrice_max(500)
-            }}
-            />
-            <Text
-              style={{
-                justifyContent: "center",
-                marginTop: 8,
-                fontFamily: "Medium",
-              }}
-            >
-              1 ETB-500 ETB
-            </Text>
-          </View>
-          <View style={{ display: "flex", flexDirection: "row" }}>
-            <RadioButton
-              value="500-1000"
-              status={checked === "500-1000" ? "checked" : "unchecked"}
-              onPress={() => {setChecked("500-1000")
-              setPrice_min(500),
-              setPrice_max(1000)
-            }}
-            />
-            <Text
-              style={{
-                justifyContent: "center",
-                marginTop: 8,
-                fontFamily: "Medium",
-              }}
-            >
-              500 ETB - 1000 ETB 
-            </Text>
-          </View>
-
-          <View style={{ display: "flex", flexDirection: "row" }}>
-          <RadioButton
-              value="1000-5000"
-              status={checked === "1000-5000" ? "checked" : "unchecked"}
-              onPress={() => {setChecked("1000-5000")
-              setPrice_min(1000),
-              setPrice_max(5000)
-            }}
-            />
-            <Text
-              style={{
-                justifyContent: "center",
-                marginTop: 8,
-                fontFamily: "Medium",
-              }}
-            >
-              1000 ETB - 5000 ETB
-            </Text>
-          </View><br></br>
-          <View style={{ display: "flex", flexDirection: "row" }}>
-          <RadioButton
-              value="5000-10000"
-              status={checked === "5000-10000" ? "checked" : "unchecked"}
-              onPress={() => {setChecked("5000-10000")
-              setPrice_min(5000),
-              setPrice_max(10000)
-            }}
-            />
-            <Text
-              style={{
-                justifyContent: "center",
-                marginTop: 8,
-                fontFamily: "Medium",
-              }}
-            >
-              5000 ETB - 10,000 ETB
-            </Text>
-          </View>
-          <View style={{ display: "flex", flexDirection: "row" }}>
-          <RadioButton
-              value="10000-50000"
-              status={checked === "10000-50000" ? "checked" : "unchecked"}
-              onPress={() => {setChecked("10000-50000")
-              setPrice_min(10000),
-              setPrice_max(50000)
-            }}
-            />
-            <Text
-              style={{
-                justifyContent: "center",
-                marginTop: 8,
-                fontFamily: "Medium",
-              }}
-            >
-              10,000 ETB - 50,000 ETB
-            </Text>
-          </View>
-          <View style={{ display: "flex", flexDirection: "row" }}>
-          <RadioButton
-              value="50000-100000"
-              status={checked === "50000-100000" ? "checked" : "unchecked"}
-              onPress={() => {setChecked("50000-100000")
-              setPrice_min(50000),
-              setPrice_max(100000)
-            }}
-            />
-            <Text
-              style={{
-                justifyContent: "center",
-                marginTop: 8,
-                fontFamily: "Medium",
-              }}
-            >
-              50,000 ETB - 100,000 ETB
-            </Text>
-          </View>
-          <View style={{ display: "flex", flexDirection: "row" }}>
-            <RadioButton
-              value="100000-500000"
-              status={checked === "100000-500000" ? "checked" : "unchecked"}
-              onPress={() => {setChecked("100000-500000")
-              setPrice_min(500000),
-              setPrice_max(1000000)
-            }}
-            />
-            <Text
-              style={{
-                justifyContent: "center",
-                marginTop: 8,
-                fontFamily: "Medium",
-              }}
-            >
-              100,000 ETB - 500,000 ETB
-            </Text>
-          </View>
-        </View>
-      </View>
-    </View>
-    </View>
-  }
+ 
 
   return (
     <SafeAreaView>
       <View style={styles.appBarWrapper}>
         <View style={styles.appBar}>
-          <Text style={styles.companyTxt}>etho express</Text>
+          <Text style={styles.companyTxt}>etho&nbsp;express</Text>
           <View style={{marginLeft:180}}> 
           <Pressable  onPress={() =>  navigation.navigate('Profile')}>
       <Ionicons name="people-circle-outline" size={32}  ></Ionicons>
@@ -496,17 +170,346 @@ borderRadius:3,padding:3,height:30, marginLeft:10,}}
         >
           <Search></Search> 
           <Pressable 
-          style={{width:WIDTH,backgroundColor:'none',padding:2,fontFamily:'Medium',
+          style={{width:WIDTH,backgroundColor:'none',padding:2,fontFamily:'Medium',zIndex:1,
          marginTop:-15,color:'white',marginLeft:WIDTH/3,
           alignItems:'center',justifyContent:'center'}}
           onPress={() => setShow(!show)}> 
+<View>
 
       <Ionicons name="menu-outline" size={42} style={{color:COLORS.color4,  }} ></Ionicons>
+</View>
           
           </Pressable>
          
           {
-            show ? <User/>:null
+            show ? (<View style={{backgroundColor:'transparent'  }}>
+            <View
+              style={{
+                display: "flex",
+                flex:1,
+                flexWrap:'wrap',
+                flexDirection: "row",
+                paddingLeft:10,
+                paddingTop:10,
+                paddingBottom:10,
+                backgroundColor: "white",
+                height: HEIGHT / 15,
+              }}
+            >
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                   
+                }}
+              >
+              
+                <View style={{fontFamily:'Medium',}}><Text>Show</Text></View>
+                <View style={{marginTop:-5, height:20}}>
+                  <Dropdown style={{  
+        
+         backgroundColor:"lightgrey" ,fontFamily:'Medium' ,
+        borderRadius:3,padding:3,height:30, marginLeft:10,
+        
+        }}
+                    placeholder={!isshowFocus ? ' 10' : ''}
+                    placeholderStyle={{width:30,height:20,alignItems:'center',fontFamily:'Medium'}}
+                    selectedTextStyle={{width:30,height:20,alignItems:'center',fontFamily:'Medium', color:COLORS.color1, paddingLeft:5}}
+                      data={Show}
+                      labelField="showlabel"
+                      valueField="showvalue"
+                      value={showvalue}
+            onFocus={() => setIsshowFocus(true)}
+            onBlur={() => setIsshowFocus(false)}
+            onChange={item => {
+              setshowValue(item.showvalue);
+              setIsshowFocus(false);
+            }}
+                  ></Dropdown>
+                </View>
+              </View>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  paddingLeft:10,
+                
+        
+                }}
+              >
+                <View style={{fontFamily:'Medium',}}><Text>Sort By :</Text></View>
+                <View style={{marginTop:-5.5, height:20}}>
+                  <Dropdown style={{  
+        
+        borderBottomColor: 'black', backgroundColor:'lightgrey',borderColor:'black',fontFamily:'Medium',
+        borderRadius:3,padding:3,height:30, marginLeft:10,}}
+                    placeholder={!isshowFocus ? '' : ''}
+                    placeholderStyle={{width:60,height:20,alignItems:'center',fontFamily:'Medium',marginTop:-2}}
+                    selectedTextStyle={{width:60,height:20,alignItems:'center',fontFamily:'Medium',color:COLORS.color1, paddingLeft:5}}
+                      data={Sort}
+                      labelField="sortlabel"
+                      valueField="sortvalue"
+                      value={sortvalue}
+            onFocus={() => setIssortFocus(true)}
+            onBlur={() => setIssortFocus(false)}
+            onChange={item => {
+              setsortValue(item.sortvalue);
+              
+              setIssortFocus(false);
+            }}
+                  ></Dropdown>
+                </View>
+              </View>
+             
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+               
+                  paddingTop:12,
+                  marginTop:4
+        
+                }}
+              >
+                <View style={{fontFamily:'Medium',}}><Text>Order By :</Text></View>
+                <View style={{marginTop:-5.5, height:20}}>
+                  <Dropdown
+                  style={{  
+        
+                    borderBottomColor: 'gray', backgroundColor:'lightgrey',borderColor:'white',fontFamily:'Medium',
+                    borderRadius:3,padding:3,height:30, marginLeft:10}}
+                    placeholder={!issortFocus ? '' : ''}
+                    placeholderStyle={{width:100,height:20,alignItems:'center',fontFamily:'Medium',marginTop:-2}}
+                    selectedTextStyle={{width:100,height:20,alignItems:'center',fontFamily:'Medium',color:COLORS.color1,paddingLeft:5}}
+                      data={Order}
+                      labelField="orderlabel"
+                      valueField="ordervalue"
+                      value={ordervalue}
+            onFocus={() => setIsorderFocus(true)}
+            onBlur={() => setIsorderFocus(false)}
+            onChange={item => {
+              setorderValue(item.ordervalue);
+              setIsorderFocus(false);
+            }}
+                  ></Dropdown>
+                </View>
+              </View>
+             
+            </View>
+        
+            <View
+              style={{ backgroundColor: "white", WIDTH: WIDTH, height: 320 }}
+            >
+              <View>
+                <Text
+                  style={{
+                    marginLeft: 10,
+                    marginTop: 20,
+                    fontFamily: "Medium",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  Categories
+                </Text>
+                <View style={styles.container}>
+                {
+                          categ_data?.map((x) =>(
+                            <View key={x.id} style={styles.checkboxContainer}>
+                                 
+                                 <input type="checkbox" id={x.id} 
+                          
+                          value={x.id} onChange={handleChange} />
+                    <Text style={styles.label}>{x.attributes?.title}</Text>
+                </View>
+                          ))  
+                }
+        
+                  
+                   
+                </View>
+              </View>
+              <View>
+                <Text
+                  style={{
+                    marginLeft: 10,
+                 
+                    fontFamily: "Medium",
+                    textTransform: "capitalize",
+                   
+                  }}
+                >
+                  Shop By Price
+                </Text>
+        
+                <View
+                  style={{
+                    backgroundColor: "White",
+                    flex: 1,
+                    alignItems: "left",
+                    justifyContent: "left",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    alignItems: "flex-end",
+                   
+                  }}
+                >
+                  <View style={{ display: "flex", flexDirection: "row" }}>
+                    <RadioButton
+                      value="1-1000000"
+                      status={checked === "1-1000000" ? "checked" : "unchecked"}
+                      onPress={() => {setChecked("1-1000000")
+                      setPrice_min(1),
+                      setPrice_max(1000000)
+                    }}
+                    />
+                    <Text
+                      style={{
+                        justifyContent: "center",
+                        marginTop: 8,
+                        fontFamily: "Medium",
+                      }}
+                    >
+                      All Price
+                    </Text>
+                  </View>
+                  <View style={{ display: "flex", flexDirection: "row" }}>
+                    <RadioButton
+                      value="1-500"
+                      status={checked === "1-500" ? "checked" : "unchecked"}
+                      onPress={() => {setChecked("1-500")
+                      setPrice_min(1),
+                      setPrice_max(500)
+                    }}
+                    />
+                    <Text
+                      style={{
+                        justifyContent: "center",
+                        marginTop: 8,
+                        fontFamily: "Medium",
+                      }}
+                    >
+                      1 ETB-500 ETB
+                    </Text>
+                  </View>
+                  <View style={{ display: "flex", flexDirection: "row" }}>
+                    <RadioButton
+                      value="500-1000"
+                      status={checked === "500-1000" ? "checked" : "unchecked"}
+                      onPress={() => {setChecked("500-1000")
+                      setPrice_min(500),
+                      setPrice_max(1000)
+                    }}
+                    />
+                    <Text
+                      style={{
+                        justifyContent: "center",
+                        marginTop: 8,
+                        fontFamily: "Medium",
+                      }}
+                    >
+                      500 ETB - 1000 ETB 
+                    </Text>
+                  </View>
+        
+                  <View style={{ display: "flex", flexDirection: "row" }}>
+                  <RadioButton
+                      value="1000-5000"
+                      status={checked === "1000-5000" ? "checked" : "unchecked"}
+                      onPress={() => {setChecked("1000-5000")
+                      setPrice_min(1000),
+                      setPrice_max(5000)
+                    }}
+                    />
+                    <Text
+                      style={{
+                        justifyContent: "center",
+                        marginTop: 8,
+                        fontFamily: "Medium",
+                      }}
+                    >
+                      1000 ETB - 5000 ETB
+                    </Text>
+                  </View><br></br>
+                  <View style={{ display: "flex", flexDirection: "row" }}>
+                  <RadioButton
+                      value="5000-10000"
+                      status={checked === "5000-10000" ? "checked" : "unchecked"}
+                      onPress={() => {setChecked("5000-10000")
+                      setPrice_min(5000),
+                      setPrice_max(10000)
+                    }}
+                    />
+                    <Text
+                      style={{
+                        justifyContent: "center",
+                        marginTop: 8,
+                        fontFamily: "Medium",
+                      }}
+                    >
+                      5000 ETB - 10,000 ETB
+                    </Text>
+                  </View>
+                  <View style={{ display: "flex", flexDirection: "row" }}>
+                  <RadioButton
+                      value="10000-50000"
+                      status={checked === "10000-50000" ? "checked" : "unchecked"}
+                      onPress={() => {setChecked("10000-50000")
+                      setPrice_min(10000),
+                      setPrice_max(50000)
+                    }}
+                    />
+                    <Text
+                      style={{
+                        justifyContent: "center",
+                        marginTop: 8,
+                        fontFamily: "Medium",
+                      }}
+                    >
+                      10,000 ETB - 50,000 ETB
+                    </Text>
+                  </View>
+                  <View style={{ display: "flex", flexDirection: "row" }}>
+                  <RadioButton
+                      value="50000-100000"
+                      status={checked === "50000-100000" ? "checked" : "unchecked"}
+                      onPress={() => {setChecked("50000-100000")
+                      setPrice_min(50000),
+                      setPrice_max(100000)
+                    }}
+                    />
+                    <Text
+                      style={{
+                        justifyContent: "center",
+                        marginTop: 8,
+                        fontFamily: "Medium",
+                      }}
+                    >
+                      50,000 ETB - 100,000 ETB
+                    </Text>
+                  </View>
+                  <View style={{ display: "flex", flexDirection: "row" }}>
+                    <RadioButton
+                      value="100000-500000"
+                      status={checked === "100000-500000" ? "checked" : "unchecked"}
+                      onPress={() => {setChecked("100000-500000")
+                      setPrice_min(500000),
+                      setPrice_max(1000000)
+                    }}
+                    />
+                    <Text
+                      style={{
+                        justifyContent: "center",
+                        marginTop: 8,
+                        fontFamily: "Medium",
+                      }}
+                    >
+                      100,000 ETB - 500,000 ETB
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+            </View>):null
           }
 
           
@@ -516,16 +519,7 @@ borderRadius:3,padding:3,height:30, marginLeft:10,}}
 
 
           <View
-      //  style={{
-      //         backgroundColor: "transparent",
-      //         WIDTH: WIDTH,
-      //         flex: 1,
-      //         flexDirection: "row",
-      //         flexWrap: "wrap",
-      //         alignItems: "flex-end",
-      //         marginTop: 20,
-      //         padding: 5,
-      //       }}  
+      style={{marginTop:-30}}
           >
                  <List  
 								 	showvalue={showvalue}
@@ -573,7 +567,7 @@ borderRadius:3,padding:3,height:30, marginLeft:10,}}
                 paddingLeft: 10,
                 paddingRight: 10,
                 margin: 5,
-                shadowColor: "#171717",
+                boxShadow: "#171717",
                 shadowOffset: { width: -2, height: 1 },
                 shadowOpacity: 0.2,
                 shadowRadius: 3,
@@ -594,7 +588,7 @@ borderRadius:3,padding:3,height:30, marginLeft:10,}}
                 alignItems: "center",
                 justifyContent: "center",
 
-                shadowColor: "#171717",
+                boxShadow: "#171717",
                 shadowOffset: { width: -2, height: 1 },
                 shadowOpacity: 0.2,
                 shadowRadius: 3,
@@ -612,7 +606,7 @@ borderRadius:3,padding:3,height:30, marginLeft:10,}}
                 paddingRight: 10,
                 margin: 5,
 
-                shadowColor: "#171717",
+                boxShadow: "#171717",
                 shadowOffset: { width: -2, height: 1 },
                 shadowOpacity: 0.2,
                 shadowRadius: 3,
@@ -651,6 +645,8 @@ const styles = StyleSheet.create({
   companyTxt: {
     textTransform: "capitalize",
     fontFamily: "Bold",
+    fontSize:25,
+    width:200
   
   },
   cartcount: {

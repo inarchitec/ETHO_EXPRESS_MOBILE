@@ -2,17 +2,13 @@ import { StyleSheet, Text, View,SafeAreaView,Dimensions ,Image, ImageBackground,
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
-import { ScrollView } from 'react-native-web';
+import { ScrollView } from 'react-native';
 import { SIZES, COLORS } from '../constants';
 import CarouselButton from '../components/CarouselButton'
 import useFetch from '../hooks/useFetch';
 import {REACT_APP_UPLOAD_URL} from '@env';
  
-const images = [
-  "https://images.unsplash.com/photo-1516383274235-5f42d6c6426d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZWNjb21lcmNlfGVufDB8fDB8fHww",
-  "https://images.unsplash.com/photo-1487014679447-9f8336841d58?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZWNjb21lcmNlfGVufDB8fDB8fHww",
-  "https://images.unsplash.com/photo-1682685797277-f2bf89b24017?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8"
-]
+ 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
  const Carousel = () => {
@@ -23,16 +19,17 @@ const HEIGHT = Dimensions.get('window').height;
   const navigation = useNavigation(); 
    const [imgActive, setimgActive] = useState(0);
 /*    console.log(imgActive,'imgActive') */
-   onchange = (nativeEvent) => 
-   {
-      if(nativeEvent){
-        const slide = Math.ceil(nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.Width)
-        // console.log(slide,'slide')
-        if(slide != imgActive) {
-          setimgActive(slide);
-        }
-      }
-   }
+  //  onchange = (nativeEvent) => 
+  //  {
+  //     if(nativeEvent){
+        
+  //       const slide = Math.ceil(nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.Width)
+  //       console.log(slide,'slide')
+  //       if(slide != imgActive) {
+  //         setimgActive(slide);
+  //       }
+  //     }
+  //  }
       return (
         <View>
        <SafeAreaView style={styles.container}>
@@ -49,7 +46,7 @@ const HEIGHT = Dimensions.get('window').height;
                 data?.map((e, index) =>
                
                
-                <ImageBackground
+                <ImageBackground 
                 key={e.id}
                 resizeModel='stretch'
                 style={styles.wrap}
@@ -69,7 +66,7 @@ const HEIGHT = Dimensions.get('window').height;
                 </ImageBackground>
 
                
-               /*   */
+              
                 )
               }
                </ScrollView>

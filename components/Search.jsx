@@ -8,7 +8,7 @@ import { Button, SearchBar } from 'react-native-elements';
 import { useState } from 'react';
 const Search = () => {
     const [search, setSearch]= useState('');
-    // console.log(search, 'search')
+    console.log(search, 'search')
     // const searchvalue = (z) =>{
     //   console.log(z)
     // }

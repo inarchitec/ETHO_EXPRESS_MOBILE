@@ -21,6 +21,9 @@ const Cards = ({item}) => {
   }
   // console.log(pass, 'card')
   return (
+    <View>
+
+    
     <Pressable onPress={() =>  navigation.navigate('Product',  {state:{e}})}>
        
     <Card 
@@ -61,6 +64,7 @@ const Cards = ({item}) => {
               </View>
               </Card>  
               </Pressable>
+              </View>
     
   )
 }

@@ -8,6 +8,7 @@ import { Button } from "native-base";
 
 
  const WIDTH = Dimensions.get('window').width;
+ 
 const HEIGHT = Dimensions.get('window').height;
 const Trending = ({type}) => {
   const { data, loading, error } = useFetch(
@@ -35,8 +36,8 @@ const [selectedCateg, setSelectedCateg] = useState([]);
     
       <Text style={styles.theheader}>Trending items</Text>
       {
-      categ_data?.map((y)=> (
-                                      <View>
+      categ_data?.map((y, index)=> (
+                                      <View key={index}>
                                         <Text    style={styles.btntxt}>
 
                                              {y}
@@ -51,7 +52,7 @@ const [selectedCateg, setSelectedCateg] = useState([]);
         
         <View style={styles.wrap}>
             <ScrollView
-            onScroll={({nativeEvent}) => Onchange(nativeEvent) }
+            // onScroll={({nativeEvent}) => Onchange(nativeEvent) }
             showsHorizontalScrollIndicator={false}
             pagingEnabled
             horizontal
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     },therow:{
       padding:10,
       flex:1,
-      direction:'flex',
+      writingDirection:'flex',
       flexDirection:'row',
     },wrap:{
      

@@ -10,6 +10,7 @@ import { REACT_APP_UPLOAD_URL } from "@env";
 import { REACT_APP_API_URL } from "@env";
 import { REACT_APP_API_TOKEN } from "@env";
 import { COLORS } from "../constants";
+import AsyncStorage from '@react-native-async-storage/async-storage';
  
  
   
@@ -23,7 +24,7 @@ const Profile = () => {
   const [error, setError] = useState();
   const [payinfo, setPayinfo] = useState();
   const Cart_Products = useSelector((state) => state.Cart_Products);
-  // console.log(user_info)
+  console.log(user_info, 'user_info')
   /* console.log(Cart_Products,'Cart_Products') */
   const Email = user_info.email;
   // console.log(Email);
@@ -54,8 +55,8 @@ const Profile = () => {
 
   // console.log(payinfo, "payinfo");
   const logout = () =>{
-	localStorage.removeItem("user",{})
-	navigate.navigate('Home')
+	AsyncStorage.removeItem("user",{})
+	navigation.navigate('Home')
 }
 
   return (
@@ -69,7 +70,7 @@ const Profile = () => {
       >
 
         {
-            user_info == '' ? (
+            user_info == null ? (
                 <Pressable style={{alignItems:'center'}} onPress={() =>  navigation.navigate('Login')}>
                 <Text style={{ margin:10,width:WIDTH-250,height:50,boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
                 color:'white',textAlign:'center',textTransform: "uppercase",fontWeight:'Medium',

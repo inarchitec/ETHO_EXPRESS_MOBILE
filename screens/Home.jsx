@@ -2,7 +2,7 @@
  import React from 'react'
  import styles from './home.style'
  import {Ionicons} from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-web';
+import { TouchableOpacity } from 'react-native';
 import Search from '../components/Search';
 import Carousel from '../components/Carousel';
 import CategoryPost from '../components/CategoryPost';

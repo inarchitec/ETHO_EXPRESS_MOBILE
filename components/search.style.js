@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         backgroundColor:'transparent',
         color:'#666',
         borderRadius:0,
-        border:'none',
+       
         fontSize:14,
         fontWeight:'400',
          

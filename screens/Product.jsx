@@ -40,8 +40,8 @@ const Product = ({ route  }) => {
          style={styles.wrap}
        >
         {
-          item?.attributes?.gallery?.data.map((x)=>(
-            <ImageBackground source={REACT_APP_UPLOAD_URL + x.attributes?.url} style={styles.container2} >
+          item?.attributes?.gallery?.data.map((x, index)=>(
+            <ImageBackground source={REACT_APP_UPLOAD_URL + x.attributes?.url} style={styles.container2} key={index} >
         
          
             </ImageBackground>   

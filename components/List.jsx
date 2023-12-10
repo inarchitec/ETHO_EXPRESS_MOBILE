@@ -51,9 +51,7 @@ const List = ({
        marginTop: 20,
        padding: 5,
     }}>
-       {loading
-          ? "loading"
-          : currentPageData
+       {  currentPageData
               ?.filter((item) => {
                 return search.toLowerCase() === " "
                   ? item

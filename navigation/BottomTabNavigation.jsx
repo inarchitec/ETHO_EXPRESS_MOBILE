@@ -34,19 +34,7 @@ const BottomTabNavigation = () => {
     return (
     <Tab.Navigator screenOptions={screenOptions}  >
         
-        {/* <Tab.Screen  name='Profile'  component={Profile}
-        options={
-            {
-                tabBarIcon:({focused}) =>{
-                    
-                    return <View><Ionicons name={focused ? "home" : "home-outline"}
-                    size={24}
-                    color={focused ? COLORS.color1 : COLORS.color3}
-                    /></View>
-                }
-            }
-        }
-        />      */}
+          
 
  
     <Tab.Screen  name='Home'  component={Home}
@@ -66,10 +54,10 @@ const BottomTabNavigation = () => {
         options={
             { 
                 tabBarIcon:({focused}) =>{
-                    return <Ionicons name={focused ? "briefcase" : "briefcase-outline"}
+                    return <View><Ionicons name={focused ? "briefcase" : "briefcase-outline"}
                     size={24}
                     color={focused ? COLORS.color1 : COLORS.color3}
-                    />
+                    /></View>
                 }
             }
         }/>   

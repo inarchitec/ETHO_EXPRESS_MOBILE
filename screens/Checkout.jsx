@@ -201,11 +201,18 @@ style={{height: HEIGHT  ,width:WIDTH, paddingBottom:200}}
             <View className="col-3  " style={{margin:'10px'}}>
             <View style={{marginLeft:'1.4rem'}}>
 
-            {res?.response?.data?.status == 'failed' ? <View class="alert alert-danger" style={{marginTop:'20px'}}><strong>{res?.response?.data?.status}</strong><br></br>  {res?.response?.data?.message?.amount}</View> : ''}
+<View>
+
+{res?.response?.data?.status == 'failed' ? (<View class="alert alert-danger" style={{marginTop:'20px'}}><strong>{res?.response?.data?.status}</strong><br></br>  {res?.response?.data?.message?.amount}</View>) : ''}
+
+</View>
    
 
 
-         <View style={{textTransform:'uppercase',fontFamily:'Medium',fontSize:22,}}>Pay With Chapa</View>
+         <View >
+          <Text style={{textTransform:'uppercase',fontFamily:'Medium',fontSize:22,}}>Pay With Chapa</Text>
+        
+          </View>
        <Pressable type="button" onPress={post_to_backend}   style={{width:180,marginTop:20}}  >
 
        <img src={img}  style={{width:180}}></img>
