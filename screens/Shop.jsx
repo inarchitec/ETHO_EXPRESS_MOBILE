@@ -139,16 +139,17 @@ const pageCount = Math.ceil( data?.length / showvalue);
 
   return (
     <SafeAreaView>
-      <View style={styles.appBarWrapper}>
-        <View style={styles.appBar}>
-          <Text style={styles.companyTxt}>etho&nbsp;express</Text>
-          <View style={{marginLeft:180}}> 
-          <Pressable  onPress={() =>  navigation.navigate('Profile')}>
+        <View  style={styles.appBarWrapper}>
+      <View style={styles.appBar}>
+        <Text style={styles.companyTxt}>etho express</Text>
+        <View style={{marginLeft:80}}>
+
+      <Pressable  onPress={() =>  navigation.navigate('Profile')}>
       <Ionicons name="people-circle-outline" size={32}  ></Ionicons>
       </Pressable>
-          </View>
+        </View>
 
-          <Pressable onPress={() =>  navigation.navigate('Cart')} >
+            <Pressable onPress={() =>  navigation.navigate('Cart')} >
         <View style={{ alignItems:'flex-end'}}>
             <View style={styles.cartcount}>
               <Text style={styles.cartNumber}>
@@ -160,8 +161,8 @@ const pageCount = Math.ceil( data?.length / showvalue);
             <Ionicons name="cart-outline" size={32}  ></Ionicons>
         </View>
             </Pressable>
-        </View>
       </View>
+     </View>
       <View style={{ flex: 1, marginTop: 20 }}>
         <ScrollView
           Vertical
@@ -652,7 +653,7 @@ const styles = StyleSheet.create({
   cartcount: {
     position: "absolute",
     bottom: 16,
-    left: 12,
+    left: 18,
     width: 16,
     height: 16,
     borderRadius: 8,
