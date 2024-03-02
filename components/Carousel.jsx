@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View,SafeAreaView,Dimensions ,Image, ImageBackground, Button } from 'react-native'
+import { StyleSheet, Text, View,SafeAreaView,Dimensions ,Image, ImageBackground, Button } from  'deprecated-react-native-prop-types';
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { ScrollView } from 'react-native';
 import { SIZES, COLORS } from '../constants';
-import CarouselButton from '../components/CarouselButton'
+// import CarouselButton from '../components/CarouselButton'
 import useFetch from '../hooks/useFetch';
 import {REACT_APP_UPLOAD_URL} from '@env';
- 
- 
+
+
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
  const Carousel = () => {
@@ -16,13 +16,13 @@ const HEIGHT = Dimensions.get('window').height;
   const { data, loading, error } = useFetch(`/main-posts?populate=*`);
   // console.log(data, 'carosel')
 
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
    const [imgActive, setimgActive] = useState(0);
 /*    console.log(imgActive,'imgActive') */
-  //  onchange = (nativeEvent) => 
+  //  onchange = (nativeEvent) =>
   //  {
   //     if(nativeEvent){
-        
+
   //       const slide = Math.ceil(nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.Width)
   //       console.log(slide,'slide')
   //       if(slide != imgActive) {
@@ -34,9 +34,9 @@ const HEIGHT = Dimensions.get('window').height;
         <View>
        <SafeAreaView style={styles.container}>
 
-          <View style={styles.wrap}>
+          {/* <View style={styles.wrap}>
             <ScrollView
-       
+
             showsHorizontalScrollIndicator={false}
             pagingEnabled
             horizontal
@@ -44,44 +44,44 @@ const HEIGHT = Dimensions.get('window').height;
             >
               {
                 data?.map((e, index) =>
-               
-               
-                <ImageBackground 
+
+
+                <ImageBackground
                 key={e.id}
                 resizeModel='stretch'
                 style={styles.wrap}
 
                 source={REACT_APP_UPLOAD_URL + e.attributes?.image?.data.attributes?.url}
-                
+
                 >
  <Text style={styles.txxt1}>UP TO 50% OFF</Text>
  <Text style={styles.txxt2}>Spice For Shiro wet</Text>
- <Text  style={styles.txxt3}>Maboriosam in a nesciung eget magnae dapibus disting tloctio in the 
+ <Text  style={styles.txxt3}>Maboriosam in a nesciung eget magnae dapibus disting tloctio in the
   find it pereri odiy maboriosm.</Text>
- 
+
   <View  style={styles.txxt4}>
 
-  <CarouselButton text='shop now !'  onPress={() => navigation.navigate('Shop')}/> 
+  <CarouselButton text='shop now !'  onPress={() => navigation.navigate('Shop')}/>
   </View>
                 </ImageBackground>
 
-               
-              
+
+
                 )
               }
                </ScrollView>
-               
-           
-          </View>
+
+
+          </View> */}
               {/* <View style={styles.wrapDot}>
-                 
+
                   {
                     images.map((e, index) =>
                     <Text key={e}
-                    
+
                     style={imgActive == index ? styles.dotActive : styles.dot}
                     >
-                    ● 
+                    ●
                     </Text>
                     )
                   }
@@ -89,8 +89,8 @@ const HEIGHT = Dimensions.get('window').height;
        </SafeAreaView>
        </View>
       )
-    
-  
+
+
 }
 
 export default Carousel
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   container:{
     flex:1,
     marginBottom:20,
-     
+
   },
   wrap:{
     width:WIDTH,
@@ -108,8 +108,8 @@ const styles = StyleSheet.create({
      position:'absolute',
     bottom:0,
     flexDirection:'row',
-    alignSelf:'center'  
-    
+    alignSelf:'center'
+
   },
   dotActive:{
     margin:3,
@@ -148,7 +148,6 @@ const styles = StyleSheet.create({
     marginTop:10
 
   }
-  
+
 
 })
- 

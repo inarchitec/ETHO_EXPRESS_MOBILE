@@ -1,7 +1,7 @@
 import React from "react";
-import Carousel from "./Carousel";
+// import Carousel from "./Carousel";
 import { StyleSheet, Pressable, View,Text } from "react-native";
- 
+
 import { COLORS } from "../constants";
 
 
@@ -19,10 +19,10 @@ export default function CarouselButton({text,onPress}) {
 }
 const styles = StyleSheet.create({
     Button:{
-     
+
         paddingVertical:5,
         paddingHorizontal:10,
-        
+
         backgroundColor:COLORS.color4,
         width:130
     },

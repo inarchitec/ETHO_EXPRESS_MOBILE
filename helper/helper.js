@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
- 
+
 
 
 export const storeUser =    (data) => {
@@ -20,7 +20,7 @@ export const storeUser =    (data) => {
     }catch(error){
         console.log(error)
     }
-   
+
 }
 
 export const UserData =  () => {
@@ -30,19 +30,19 @@ export const UserData =  () => {
     }catch(error){
         console.log(error)
     }
-  
+
 }
 
 
 export const Protector = ({component}) => {
-    
+
    const navigate = useNavigation();
    const { jwt} = UserData();
 
    useEffect(() =>{
        if(!jwt) {
            navigate("/login")
-       } 
-       
+       }
+
    },[navigate, jwt])
 }

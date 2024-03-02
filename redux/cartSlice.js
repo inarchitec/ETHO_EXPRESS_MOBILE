@@ -40,4 +40,4 @@ export const {
   incrementQuantity,
   decrementQuantity,
   removeItem,
-} = cartSlice.actions;  
+} = cartSlice.actions;

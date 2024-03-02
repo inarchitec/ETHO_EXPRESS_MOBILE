@@ -20,7 +20,7 @@ import {
 } from "../redux/cartSlice";
 import { useNavigation } from "@react-navigation/native";
 
-import { UserData } from "../helper/helper";
+// import { UserData } from "../helper/helper";
 
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
@@ -232,7 +232,7 @@ const Cart = () => {
                     </Pressable>
                   </View>
                 </DataTable.Cell>
-                {/*/ End Input Order */}
+
               </View>
               <DataTable.Cell
                 style={{
@@ -250,8 +250,8 @@ const Cart = () => {
                       fontSize: 13,
                     }}
                   >
-                    
-                    <Text>{item.price * item.quantity}</Text> 
+
+                    <Text>{item.price * item.quantity}</Text>
                   </View>
 
                   <Pressable onPress={() => dispatch(removeItem(item.id))}>

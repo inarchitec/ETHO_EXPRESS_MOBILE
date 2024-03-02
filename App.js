@@ -7,7 +7,7 @@ import { useCallback } from 'react';
  import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 import BottomTabNavigation from './navigation/BottomTabNavigation';
- 
+
 import { NativeBaseProvider, Text, Box } from "native-base";
 import Product from './screens/Product';
 import Cart from './screens/Cart'
@@ -21,32 +21,32 @@ import React from 'react'
 import { useState } from 'react';
 
  const Stack = createNativeStackNavigator();
- 
+
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './redux/store';
 import { UserData } from './helper/helper';
- 
+
 import { useNavigation } from '@react-navigation/native';
 
 const user_info = UserData();
 
  const getIsSignedIn = () =>{
-  
+
   if( user_info == ''){
     return false;
   }else{
     return  true;
   }
 
-    
-  
-   
+
+
+
  }
- 
- 
+
+
 export default function App() {
-   
+
  const [fontsLoaded] = useFonts({
   "Black": require("./assets/fonts/Poppins-Black.ttf"),
   "BlackItalic": require("./assets/fonts/Poppins-BlackItalic.ttf"),
@@ -64,58 +64,58 @@ export default function App() {
   "SemiBoldItalic": require("./assets/fonts/Poppins-SemiBoldItalic.ttf"),
   "Thin": require("./assets/fonts/Poppins-Thin.ttf"),
   "ThinItalic": require("./assets/fonts/Poppins-ThinItalic.ttf"),
-   
+
 })
   const OnLayOutRootView = useCallback(async() =>{
     if(fontsLoaded){
       await SplashScreen.hideAsync();
     }
-  },[fontsLoaded]); 
+  },[fontsLoaded]);
   if(!fontsLoaded){
     return null;
-  } 
+  }
   const isSignedIn = getIsSignedIn();
- 
-  
+
+
   return (
-   
+
 <Provider store={store}>
 <PersistGate persistor={persistor}>
      <NavigationContainer>
           <Stack.Navigator>
-          
-              <Stack.Screen 
+
+              <Stack.Screen
             name='BottomTabNavigation'
             component={BottomTabNavigation}
-            options={{headerShown:false}}/>  
-            <Stack.Screen name="Home" component={Home} options={{headerShown:false}}
-          />  
-            
-          <Stack.Screen name="Product" component={Product}   
+            options={{headerShown:false}}/>
+            {/* <Stack.Screen name="Home" component={Home} options={{headerShown:false}}
+          />
+
+          <Stack.Screen name="Product" component={Product}
            />
-           
-            <Stack.Screen name="Cart" component={Cart}   
+
+            <Stack.Screen name="Cart" component={Cart}
            />
-           
-            
-             
-           <Stack.Screen name="Profile" component={Profile}   
-           />  
-           
-           
+
+
+
+           <Stack.Screen name="Profile" component={Profile}
+           />
+
+
           <Stack.Screen name="Login" component={Login}  options={{headerShown:false}}
-           /> 
+           />
            <Stack.Screen name="Register" component={Register}  options={{headerShown:false}}
-           /> 
-           <Stack.Screen name="Checkout" component={Checkout}   
-           /> 
-           
+           />
+           <Stack.Screen name="Checkout" component={Checkout}
+           /> */}
+
           </Stack.Navigator>
-          
+
      </NavigationContainer>
           </PersistGate>
 </Provider>
- 
+
   );
   }
 
